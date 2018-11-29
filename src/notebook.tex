@@ -1,0 +1,1130 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Follow UP}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Contexto do projeto}\label{contexto-do-projeto}
+
+Obesidade está entre as doenças mais graves do século, é um problema que
+além de prejudicar uma quantidade enorme de pessoas (as projeções são
+que até 2050 mais de a metade das pessoas do mundo seja obesas), custa
+autíssimo para a saúde pública e para os planos de saúde, já que está
+fortemente ligado a diabetes, hipertensão e outras 62 doenças.
+
+Dessa forma buscamos entender com esse projeto as causas e consequências
+da obesidade, sua relação com o desenvolvimento do país, bem como sua
+relação com a diabetes e hipertensão, já que são as duas principais
+doenças relacionadas.
+
+Para tanto faremos uso de 7 datasets.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} faz todos os imports necessários}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{linregress}
+        
+        \PY{k+kn}{import} \PY{n+nn}{holoviews} \PY{k}{as} \PY{n+nn}{hv}
+        \PY{k+kn}{from} \PY{n+nn}{bokeh}\PY{n+nn}{.}\PY{n+nn}{plotting} \PY{k}{import} \PY{n}{figure}\PY{p}{,} \PY{n}{show}
+        \PY{k+kn}{from} \PY{n+nn}{bokeh}\PY{n+nn}{.}\PY{n+nn}{io} \PY{k}{import} \PY{n}{output\PYZus{}notebook}
+        \PY{k+kn}{from} \PY{n+nn}{bokeh}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Range1d}\PY{p}{,} \PY{n}{NumeralTickFormatter}\PY{p}{,} \PY{n}{FixedTicker}\PY{p}{,} \PY{n}{Legend}
+        \PY{k+kn}{from} \PY{n+nn}{bokeh}\PY{n+nn}{.}\PY{n+nn}{palettes} \PY{k}{import} \PY{n}{Set1\PYZus{}7}\PY{p}{,} \PY{n}{RdBu5}\PY{p}{,} \PY{n}{RdBu11}
+        \PY{n}{hv}\PY{o}{.}\PY{n}{extension}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bokeh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    
+    
+    
+    
+    Base de Dados úteis:
+
+\begin{verbatim}
+<li>Países por Continente</li>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{country\PYZus{}continent} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/Countries\PYZhy{}Continents.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Country}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{country\PYZus{}continent}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}          Continent
+        Country           
+        Algeria     Africa
+        Angola      Africa
+        Benin       Africa
+        Botswana    Africa
+        Burkina     Africa
+\end{Verbatim}
+            
+    \subsection{IDH no mundo}\label{idh-no-mundo}
+
+Esse dataset descreve a curva de IDH no mundo por região ao longo dos
+anos
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{humanDevelopmentIndex} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/HumanDevelopmentIndex.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{humanDevelopmentIndex} \PY{o}{=} \PY{n}{humanDevelopmentIndex}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{humanDevelopmentIndex}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{n}{humanDevelopmentIndex}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{humanDevelopmentIndex}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}              HDI Rank (2017)   1990   1991   1992   1993   1994   1995   1996  \textbackslash{}
+        Country                                                                         
+        Afghanistan              168    NaN    NaN    NaN    NaN    NaN    NaN    NaN   
+        Albania                   68  0.645  0.626  0.610  0.613  0.619  0.632  0.641   
+        Algeria                   85  0.577  0.581  0.587  0.591  0.595  0.600  0.608   
+        Andorra                   35    NaN    NaN    NaN    NaN    NaN    NaN    NaN   
+        Angola                   147    NaN    NaN    NaN    NaN    NaN    NaN    NaN   
+        
+                      1997   1998  {\ldots}     2008   2009   2010   2011   2012   2013  \textbackslash{}
+        Country                    {\ldots}                                               
+        Afghanistan    NaN    NaN  {\ldots}    0.437  0.453  0.463  0.471  0.482  0.487   
+        Albania      0.641  0.652  {\ldots}    0.724  0.729  0.741  0.752  0.767  0.771   
+        Algeria      0.617  0.627  {\ldots}    0.709  0.719  0.729  0.736  0.740  0.745   
+        Andorra        NaN    NaN  {\ldots}    0.831  0.830  0.828  0.827  0.849  0.850   
+        Angola         NaN    NaN  {\ldots}    0.502  0.522  0.520  0.535  0.543  0.554   
+        
+                      2014   2015   2016   2017  
+        Country                                  
+        Afghanistan  0.491  0.493  0.494  0.498  
+        Albania      0.773  0.776  0.782  0.785  
+        Algeria      0.747  0.749  0.753  0.754  
+        Andorra      0.853  0.854  0.856  0.858  
+        Angola       0.564  0.572  0.577  0.581  
+        
+        [5 rows x 29 columns]
+\end{Verbatim}
+            
+    \subsection{Obesidade no mundo}\label{obesidade-no-mundo}
+
+Esse dataset descreve o crescimento da obesidade ao longo dos anos por
+país. Esses dados foram coletados do Our World in Data, site que reúne
+dados e visualizações de vários datasets.
+
+A fonte dos dados foi uma coleta realizada pela UNICEF em parceria com
+alguns outros grupos.
+
+Os dados estão resumidos por país, ano e percentual de obesos em cada
+país/ano.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{worldObesity} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/share\PYZhy{}of\PYZhy{}adults\PYZhy{}defined\PYZhy{}as\PYZhy{}obese.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{worldObesity}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{worldObesity} \PY{o}{=} \PY{n}{worldObesity}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{worldObesity}\PY{o}{.}\PY{n}{year} \PY{o}{=} \PY{n}{worldObesity}\PY{o}{.}\PY{n}{year}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{worldObesity} \PY{o}{=} \PY{n}{worldObesity}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{worldObesity}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}              year  obesityPercentage
+        country                             
+        Afghanistan  1975                0.5
+        Afghanistan  1976                0.5
+        Afghanistan  1977                0.6
+        Afghanistan  1978                0.6
+        Afghanistan  1979                0.6
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}worldObesity[\PYZsq{}continent\PYZsq{}] = worldObesity.apply(lambda row: country\PYZus{}continent.loc[row.name].Continent}
+        \PY{c+c1}{\PYZsh{})}
+        \PY{n}{error\PYZus{}handling} \PY{o}{=} \PY{p}{\PYZob{}}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Russia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Russian Federation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{United States}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{US}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{North Korea}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Korea, North}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{South Korea}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Korea, South}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Micronesia (country)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Micronesia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sudan (former)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sudan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Burkina Faso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Burkina}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Democratic Republic of Congo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Congo, Democratic Republic of}\PY{l+s+s1}{\PYZsq{}}
+        \PY{p}{\PYZcb{}}
+        \PY{n}{unreachable} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Não encontrei os países no ds ou tive preguiça de procurar. Sorry}
+        \PY{n}{countries\PYZus{}ds} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{country} \PY{o+ow}{in} \PY{n}{worldObesity}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{values}\PY{p}{:}
+            \PY{k}{try}\PY{p}{:}
+                \PY{n}{countries\PYZus{}ds}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{country\PYZus{}continent}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{country}\PY{p}{]}\PY{o}{.}\PY{n}{Continent}\PY{p}{)}
+            \PY{k}{except} \PY{n+ne}{KeyError}\PY{p}{:}
+                \PY{k}{if} \PY{o+ow}{not} \PY{n}{error\PYZus{}handling}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{country}\PY{p}{,} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{unreachable}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{country}\PY{p}{)}
+                    \PY{n}{countries\PYZus{}ds}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{countries\PYZus{}ds}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{country\PYZus{}continent}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{error\PYZus{}handling}\PY{p}{[}\PY{n}{country}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{Continent}\PY{p}{)}
+        \PY{n}{worldObesity}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{continent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{countries\PYZus{}ds}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Uma boa análise. A maior porcentagem de obesidade é na Oceania e a América do Sul é maior que a do Norte}
+        \PY{c+c1}{\PYZsh{} Africa é o qeu esperamos}
+        \PY{n}{worldObesity}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{continent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} continent
+        Africa            6.149679
+        Asia              9.908673
+        Europe           15.161281
+        North America    14.485611
+        Oceania          28.345578
+        South America    14.722619
+        Name: obesityPercentage, dtype: float64
+\end{Verbatim}
+            
+    \paragraph{Relação obesidade e IDH no
+mundo}\label{relauxe7uxe3o-obesidade-e-idh-no-mundo}
+
+Agora vamos fazer esse mesmo estudo para o mundo e verificar qual a
+relevância estatística do IDH em relação a obesidade.
+
+Primeiro vamos pegar a média de obesidade no mundo a cada ano.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{worldObesityMeanPercentageByYear} \PY{o}{=} \PY{n}{worldObesity}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+        \PY{n}{worldObesityMeanPercentageByYear}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{n}{worldObesityMeanPercentageByYear}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{worldObesityMeanPercentageByYear} \PY{o}{=} \PY{n}{worldObesityMeanPercentageByYear}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentageMean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{worldObesityMeanPercentageByYear}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}       obesityPercentageMean
+        year                       
+        1975               6.510995
+        1976               6.737696
+        1977               6.962304
+        1978               7.193717
+        1979               7.430890
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{worldObesityMeanPercentageByYear}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x277519fe978>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Agora vamos pegar a média mundial do IDH de cada ano
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{worldIdhMeanByYear} \PY{o}{=} \PY{n}{humanDevelopmentIndex}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HDI Rank (2017)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{worldIdhMeanByYear} \PY{o}{=} \PY{n}{worldIdhMeanByYear}\PY{o}{.}\PY{n}{T}
+        \PY{n}{worldIdhMeanByYear} \PY{o}{=} \PY{n}{worldIdhMeanByYear}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+        \PY{n}{worldIdhMeanByYear} \PY{o}{=} \PY{n}{worldIdhMeanByYear}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{worldIdhMeanByYear} \PY{o}{=} \PY{n}{worldIdhMeanByYear}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{worldIdhMeanByYear}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{n}{worldIdhMeanByYear}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{worldIdhMeanByYear} \PY{o}{=} \PY{n}{worldIdhMeanByYear}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} worldIdhMeanByYear = worldIdhMeanByYear.rename(columns=\PYZob{}\PYZsq{}0\PYZsq{}: \PYZsq{}idhMean\PYZsq{}\PYZcb{})}
+        \PY{n}{worldIdhMeanByYear}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idhMean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{worldIdhMeanByYear}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}        idhMean
+        year          
+        1990  0.596901
+        1991  0.598937
+        1992  0.601650
+        1993  0.605231
+        1994  0.609497
+\end{Verbatim}
+            
+    Finalmente vamos unir os dois dataframes e fazer a análise estatística.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{relationWorldObesityIdhMean} \PY{o}{=} \PY{n}{worldObesityMeanPercentageByYear}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{worldIdhMeanByYear}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{relationWorldObesityIdhMean}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}       obesityPercentageMean   idhMean
+         year                                 
+         1990              10.414660  0.596901
+         1991              10.716230  0.598937
+         1992              11.018325  0.601650
+         1993              11.319895  0.605231
+         1994              11.625654  0.609497
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{relationWorldObesityIdhMean}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}                        obesityPercentageMean   idhMean
+         obesityPercentageMean               1.000000  0.998076
+         idhMean                             0.998076  1.000000
+\end{Verbatim}
+            
+    Dessa forma podemos observar uma fortíssima correlação entre o IDH e o
+nível de obesidade de um país quando se analisa a média global
+
+Agora vamos fazer uma análise mais granular dos países com maior taxa de
+obesidade Vamos tirar a média de taxa de obesidade de cada país a partir
+do ano de 2010 e comparar com a mesma média a partir do ano de 1990 (já
+que a primeira informação de IDH que temos é de 1990), para analisar se
+houve alguma mudança drástica nos ultimos anos com relação a obesidade.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{worldObesityMean} \PY{o}{=} \PY{n}{worldObesity}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{worldObesity}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{1990}\PY{p}{]}
+         \PY{n}{worldObesityMean} \PY{o}{=} \PY{n}{worldObesityMean}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{worldObesityMean} \PY{o}{=} \PY{n}{worldObesityMean}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{worldObesityMean}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{35}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x277521fd710>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{worldObesityMean} \PY{o}{=} \PY{n}{worldObesity}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{worldObesity}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{2016}\PY{p}{]}
+         \PY{n}{worldObesityMean} \PY{o}{=} \PY{n}{worldObesityMean}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{worldObesityMean} \PY{o}{=} \PY{n}{worldObesityMean}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{worldObesityMean}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{35}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x27751e35358>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{worldObesityMean}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} country
+         Nauru               61.0
+         Cook Islands        55.9
+         Palau               55.3
+         Marshall Islands    52.9
+         Tuvalu              51.6
+         Name: obesityPercentage, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{121}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{worldObesityMean}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{worldObesityMean}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{40}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{122}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Para nossa surpresa países como os EUA, Canadá e Brasil não estão no top
+5.
+
+Percebemos que não há uma mudança muito drástica nos países mais obesos
+do mundo. Então vamos continuar com a análise comparando com o idh desde
+1990.
+
+Além disso podemos perceber todos esses países fogem muito da média de
+obesidade global (que é 20\% em 2016), então vamos fazer um boxplot para
+analisar a dispersão dos dados.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{opts} BoxWhisker [height=600, width=1900, xrotation=90, show\PYZus{}legend=False]
+         boxplot = hv.BoxWhisker(worldObesity,kdims=[\PYZsq{}country\PYZsq{}], vdims=\PYZsq{}obesityPercentage\PYZsq{})
+         boxplot
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+WARNING:root:BoxWhisker02389: Setting non-parameter attribute grid=True using a mechanism intended only for parameters
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}75}]:} :BoxWhisker   [country]   (obesityPercentage)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{worldObesityMean} \PY{o}{=} \PY{n}{worldObesity}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{worldObesity}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{2016}\PY{p}{]}
+         \PY{n}{worldObesityMean} \PY{o}{=} \PY{n}{worldObesityMean}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{worldObesityMean} \PY{o}{=} \PY{n}{worldObesityMean}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{worldObesityMean} \PY{o}{=} \PY{n}{worldObesityMean}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n}{humanDevelopment} \PY{o}{=} \PY{n}{humanDevelopmentIndex}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n}{humanDevelopment} \PY{o}{=} \PY{n}{humanDevelopment}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2016}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{worldObesityMean} \PY{o}{=} \PY{n}{worldObesityMean}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{humanDevelopmentIndex}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{worldObesityMean} \PY{o}{=} \PY{n}{worldObesityMean}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{worldObesityMean}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}             country  obesityPercentage  HDI Rank (2017)   1990   1991   1992  \textbackslash{}
+         0             Palau               55.3               60    NaN    NaN    NaN   
+         1  Marshall Islands               52.9              106    NaN    NaN    NaN   
+         2             Tonga               48.2               98  0.648  0.654  0.656   
+         3             Samoa               47.3              104  0.620  0.622  0.624   
+         4          Kiribati               46.0              134    NaN    NaN    NaN   
+         
+            1993   1994   1995   1996  {\ldots}     2008   2009   2010   2011   2012   2013  \textbackslash{}
+         0   NaN    NaN    NaN    NaN  {\ldots}    0.764  0.767  0.769  0.775  0.778  0.780   
+         1   NaN    NaN    NaN    NaN  {\ldots}      NaN    NaN    NaN    NaN    NaN    NaN   
+         2  0.66  0.668  0.671  0.671  {\ldots}    0.702  0.706  0.712  0.716  0.717  0.716   
+         3  0.63  0.611  0.618  0.628  {\ldots}    0.685  0.687  0.693  0.697  0.697  0.700   
+         4   NaN    NaN    NaN    NaN  {\ldots}    0.585  0.584  0.590  0.590  0.598  0.609   
+         
+             2014   2015   2016   2017  
+         0  0.786  0.793  0.798  0.798  
+         1    NaN    NaN    NaN  0.708  
+         2  0.717  0.721  0.724  0.726  
+         3  0.703  0.706  0.711  0.713  
+         4  0.616  0.621  0.610  0.612  
+         
+         [5 rows x 31 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{populationDensity} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/population\PYZhy{}density.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{populationDensity} \PY{o}{=} \PY{n}{populationDensity}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{populationDensity}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{2016}\PY{p}{]}
+         \PY{n}{populationDensity} \PY{o}{=} \PY{n}{populationDensity}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{populationDensity} \PY{o}{=} \PY{n}{populationDensity}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{worldObesityMean}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Entity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{populationDensity} \PY{o}{=} \PY{n}{populationDensity}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2016}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population density (people per sq. km of land area) (people per km² of land area)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{populationDensity}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Obesity }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IDH}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PopulationDensity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{populationDensity} \PY{o}{=} \PY{n}{populationDensity}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Obesity }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{populationDensity} \PY{o}{=} \PY{n}{populationDensity}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{populationDensity}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:}                  Code  Obesity \%    IDH  PopulationDensity
+         Country                                                   
+         Palau             PLW       55.3  0.798          46.745652
+         Marshall Islands  MHL       52.9    NaN         294.811111
+         Tonga             TON       48.2  0.724         148.780556
+         Samoa             WSM       47.3  0.711          68.948763
+         Kiribati          KIR       46.0  0.610         141.228395
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{worldData} \PY{o}{=} \PY{n}{populationDensity}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{worldData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IDH}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{worldData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IDH}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x} \PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{worldDataPlot} \PY{o}{=} \PY{n}{worldData}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{worldDataPlot}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x27752098f28>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{worldData} \PY{o}{=} \PY{n}{populationDensity}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n}{worldData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IDH}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{worldData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IDH}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x} \PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{worldData}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:}             Country Code  Obesity \%   IDH  PopulationDensity
+         0             Palau  PLW       55.3  79.8          46.745652
+         1  Marshall Islands  MHL       52.9   NaN         294.811111
+         2             Tonga  TON       48.2  72.4         148.780556
+         3             Samoa  WSM       47.3  71.1          68.948763
+         4          Kiribati  KIR       46.0  61.0         141.228395
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k+kn}{import} \PY{n+nn}{geopandas} \PY{k}{as} \PY{n+nn}{gpd}
+         \PY{n}{gdf} \PY{o}{=} \PY{n}{gpd}\PY{o}{.}\PY{n}{read\PYZus{}file}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/ne\PYZus{}10m\PYZus{}admin\PYZus{}0\PYZus{}countries.shp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ADM0\PYZus{}A3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{geometry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}crs}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+proj=robin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{mergedgdf} \PY{o}{=} \PY{n}{gdf}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{worldData}\PY{p}{,}\PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ADM0\PYZus{}A3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{mergedgdf} \PY{o}{=} \PY{n}{mergedgdf}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Obesity }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{mergedgdf} \PY{o}{=} \PY{n}{mergedgdf}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax = mergedgdf.dropna().plot(column=\PYZsq{}Obesity \PYZpc{}\PYZsq{}, cmap=\PYZsq{}Blues\PYZsq{}, figsize=(16,10), scheme=\PYZsq{}equal\PYZus{}interval\PYZsq{}, k=9, legend=True)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Obesity }\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{ around the World in 2016}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontdict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fontsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{20}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}axis\PYZus{}off}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.5e7}\PY{p}{,} \PY{l+m+mf}{1.7e7}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}legend}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}bbox\PYZus{}to\PYZus{}anchor}\PY{p}{(}\PY{p}{(}\PY{o}{.}\PY{l+m+mi}{12}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}figure}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+WARNING:Fiona:GDAL data files not located, GDAL\_DATA not set
+WARNING:Fiona:PROJ data files not located, PROJ\_LIB not set
+
+    \end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}23}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \paragraph{Relação obesidade e IDH por
+país}\label{relauxe7uxe3o-obesidade-e-idh-por-pauxeds}
+
+Com esses dois datasets podemos relacionar o IDH com o percentual de
+obesos em cada país no passar dos anos
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{def} \PY{n+nf}{relationObesityIdhByCountry}\PY{p}{(}\PY{n}{country}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{countryObesity} \PY{o}{=} \PY{n}{worldObesity}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{country}\PY{p}{]}
+             \PY{n}{countryIdh} \PY{o}{=} \PY{n}{humanDevelopmentIndex}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{country}\PY{p}{]}
+             \PY{n}{countryIdh} \PY{o}{=} \PY{n}{countryIdh}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+             \PY{n}{countryIdh} \PY{o}{=} \PY{n}{countryIdh}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HDI Rank (2017)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{countryIdh} \PY{o}{=} \PY{n}{countryIdh}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+             \PY{n}{countryIdh} \PY{o}{=} \PY{n}{countryIdh}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{n}{countryIdh}\PY{o}{.}\PY{n}{year} \PY{o}{=} \PY{n}{countryIdh}\PY{o}{.}\PY{n}{year}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{countryIdh} \PY{o}{=} \PY{n}{countryIdh}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{country}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{n}{relationObesityIdhCountry} \PY{o}{=} \PY{n}{countryObesity}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{countryIdh}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{relationObesityIdhCountry} \PY{o}{=} \PY{n}{relationObesityIdhCountry}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+             \PY{n}{relationObesityIdhCountry} \PY{o}{=} \PY{n}{relationObesityIdhCountry}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+             \PY{n}{relationObesityIdhCountry} \PY{o}{=} \PY{n}{relationObesityIdhCountry}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{relationObesityIdhCountry} \PY{o}{=} \PY{n}{relationObesityIdhCountry}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n}{relationObesityIdhCountry}
+         
+         \PY{n}{relationObesityIdhByCountry}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Afghanistan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:}       obesityPercentage continent    idh
+         year                                    
+         2002                2.6      Asia  0.373
+         2003                2.7      Asia  0.383
+         2004                2.9      Asia  0.398
+         2005                3.0      Asia  0.408
+         2006                3.2      Asia  0.417
+         2007                3.4      Asia  0.429
+         2008                3.6      Asia  0.437
+         2009                3.8      Asia  0.453
+         2010                4.0      Asia  0.463
+         2011                4.2      Asia  0.471
+         2012                4.4      Asia  0.482
+         2013                4.7      Asia  0.487
+         2014                4.9      Asia  0.491
+         2015                5.2      Asia  0.493
+         2016                5.5      Asia  0.494
+\end{Verbatim}
+            
+    \subsection{Cirurgias bariátricas nos
+EUA}\label{cirurgias-bariuxe1tricas-nos-eua}
+
+Esse dataset descreve o crescimento de cirurgias bariátricas nos EUA ao
+longo dos anos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{bariatricSurgeriesUS} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/bariatricSurgeriesInUsfrom2011to2017.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{bariatricSurgeriesUS} \PY{o}{=} \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{bariatricSurgeriesUS} \PY{o}{=} \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bariatricSurgeriesUS} \PY{o}{=} \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{numSurgeries}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{bariatricSurgeriesUS} \PY{o}{=} \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bariatricSurgeriesUS} \PY{o}{=} \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{year} \PY{o}{=} \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{year}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{numSurgeries} \PY{o}{=} \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{numSurgeries}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{bariatricSurgeriesUS} \PY{o}{=} \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{numSurgeries} \PY{o}{=} \PY{p}{[}\PY{n}{i}\PY{o}{*}\PY{l+m+mi}{1000} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{numSurgeries}\PY{p}{]} 
+         \PY{n}{bariatricSurgeriesUS}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:}       numSurgeries
+         year              
+         2011        158000
+         2012        173000
+         2013        179000
+         2014        193000
+         2015        196000
+         2016        216000
+         2017        228000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{grid}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x2775292ea20>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Podemos ver que houve um crescimento de 44\% no número de cirurgias
+bariatricas feitas em um ano de 2011 para 2017.
+
+    Vamos agora calcular o p-value do número de cirurgias bariátricas em
+relação ao crescimento da obesidade nos EUA
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{usObesity} \PY{o}{=} \PY{n}{relationObesityIdhByCountry}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{United States}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{usObesity} \PY{o}{=} \PY{n}{usObesity}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{relationObesityBariatricSurgeryUS} \PY{o}{=} \PY{n}{bariatricSurgeriesUS}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{usObesity}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{relationObesityBariatricSurgeryUS}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:}       numSurgeries  obesityPercentage      continent
+         year                                                
+         2011        158000               33.0  North America
+         2012        173000               33.6  North America
+         2013        179000               34.3  North America
+         2014        193000               34.9  North America
+         2015        196000               35.6  North America
+         2016        216000               36.2  North America
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{x} \PY{o}{=} \PY{n}{relationObesityBariatricSurgeryUS}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{numSurgeries}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{relationObesityBariatricSurgeryUS}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{obesityPercentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{relationObesityBariatricSurgeryUSModel} \PY{o}{=} \PY{n}{linregress}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n}{relationObesityBariatricSurgeryUSModel}\PY{o}{.}\PY{n}{pvalue}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}value=}\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{relationObesityBariatricSurgeryUSModel}\PY{o}{.}\PY{n}{pvalue}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+p-value=0.001
+
+    \end{Verbatim}
+
+    \subsection{Presença de vegetais a dieta por
+país}\label{presenuxe7a-de-vegetais-a-dieta-por-pauxeds}
+
+Esse é um dataset que mostra, com base no consumo médio de vegetais por
+um país, se a população média atinge a quantidade de vegetais
+recomendada para uma dieta.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{recomendedVegetbleConsumptionPerCountry} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/average\PYZhy{}per\PYZhy{}capita\PYZhy{}vegetable\PYZhy{}intake\PYZhy{}vs\PYZhy{}minimum\PYZhy{}recommended\PYZhy{}guidelines.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{recomendedVegetbleConsumptionPerCountry} \PY{o}{=} \PY{n}{recomendedVegetbleConsumptionPerCountry}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{recomendedVegetbleConsumptionPerCountry} \PY{o}{=} \PY{n}{recomendedVegetbleConsumptionPerCountry}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Entity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average per capita vegetable intake (grams per day)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{avgVegIntake}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP per capita, PPP (constant 2011 international \PYZdl{}) (constant 2011 international \PYZdl{})}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gdp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total population (Gapminder)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{totalPopulation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{recomendedVegetbleConsumptionPerCountry}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:}        country  year  avgVegIntake  gdp  totalPopulation
+         0  Afghanistan  1800           NaN  NaN        3280000.0
+         1  Afghanistan  1820           NaN  NaN        3280000.0
+         2  Afghanistan  1870           NaN  NaN        4207000.0
+         3  Afghanistan  1913           NaN  NaN        5730000.0
+         4  Afghanistan  1950           NaN  NaN        8151455.0
+\end{Verbatim}
+            
+    \subsection{Diabetes no mundo}\label{diabetes-no-mundo}
+
+Esse dataset descreve a diabetes no mundo por região, sexto e tipo de
+moradia (rural ou urbana)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{worldDiabetes} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/IDFDiabetesAtlas\PYZhy{}PrevalenceByAgeSexUrbanRural20\PYZhy{}79years.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{worldDiabetes}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:}    country\_id report\_country IDF region Report Age Report Gender Report set  \textbackslash{}
+         0           1    Afghanistan       MENA      20-24        Female      Urban   
+         1           1    Afghanistan       MENA      20-24        Female      Rural   
+         2           1    Afghanistan       MENA      25-29        Female      Urban   
+         3           1    Afghanistan       MENA      25-29        Female      Rural   
+         4           1    Afghanistan       MENA      30-34        Female      Urban   
+         
+            Adults with diabetes (20-79) in 1,000s  \textbackslash{}
+         0                                6.786987   
+         1                               14.764568   
+         2                                9.788225   
+         3                               21.052534   
+         4                               13.800323   
+         
+            Adults population (20-79) in 1,000s Diabetes prevalence (20-79)  
+         0                           442.695289                       1.53\%  
+         1                          1162.984711                       1.27\%  
+         2                           347.899364                       2.81\%  
+         3                           913.950636                       2.30\%  
+         4                           288.586775                       4.78\%  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{worldDiabetes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Report Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} 35-39    884
+         50-54    884
+         55-59    884
+         65-69    884
+         30-34    884
+         60-64    884
+         20-24    884
+         75-79    884
+         40-44    884
+         25-29    884
+         45-49    884
+         70-74    884
+         Name: Report Age, dtype: int64
+\end{Verbatim}
+            
+    \subsection{Informações clínicas de pacientes no
+Brasil}\label{informauxe7uxf5es-cluxednicas-de-pacientes-no-brasil}
+
+Esse dataset descreve alguns fatores clínicos de pacientes no Brasil,
+dentre as labels inclui 'eObeso'
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{obesityClinicalInfo} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/obesidade.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{obesityClinicalInfo}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:}    ID  Idade  GeneroCod Eobeso  fumo\_atual    imc  obesoHer    cc   cq   rcq  \textbackslash{}
+         0   1   20.0        2.0    Não           0  27.94         0  95.0  112  0.85   
+         1   2   31.0        1.0    Não           0  28.76         0  88.0  101  0.87   
+         2   3   19.0        2.0    Não           0  25.35         0  79.0  102  0.77   
+         3   4   20.0        2.0    Não           0  20.73         0  91.0   80  1.14   
+         4   5   19.0        2.0    Não           0  24.54         0  83.0   98  0.85   
+         
+            frqCardiaca  fumo  atvFisica  stress  psisto  pdiasto  psisalta  
+         0           75   0.0        2.0     3.0  120.00    80.00       0.0  
+         1           66   0.0        2.0     0.0  128.00    74.33       1.0  
+         2           69   0.0        2.0     0.0  113.33    70.00       0.0  
+         3           85   0.0        0.0     0.0  130.00    76.67       1.0  
+         4           72   0.0        2.0     0.0  130.00    80.00       1.0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{x} \PY{o}{=} \PY{n}{obesityClinicalInfo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eobeso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+         \PY{n}{x}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}59}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x27757f480b8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Obesity: }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Obesity: 7.75 \%
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{obesityClinicalInfo}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eobeso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{frqCardiaca}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}63}]:} Eobeso
+         Não    79.276423
+         Sim    86.290323
+         Name: frqCardiaca, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{obesityClinicalInfo}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eobeso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Idade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:} Eobeso
+         Não    22.837398
+         Sim    26.741935
+         Name: Idade, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{bloodPresureSisto} \PY{o}{=} \PY{n}{obesityClinicalInfo}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eobeso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{psisto}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bloodPresureDiasto} \PY{o}{=} \PY{n}{obesityClinicalInfo}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eobeso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pdiasto}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bloodPresure} \PY{o}{=} \PY{n}{bloodPresureSisto}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{bloodPresureDiasto}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eobeso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eobeso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{bloodPresure}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{psisto}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{bloodPresure}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{psisto}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{round}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{bloodPresure}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pdiasto}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{bloodPresure}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pdiasto}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{round}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{bloodPresure}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}73}]:}         psisto  pdiasto
+         Eobeso                 
+         Não     123.81    78.47
+         Sim     134.60    86.76
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{bloodPresure}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}72}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x27758089a20>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{obesityClinicalInfo}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eobeso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{atvFisica}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} Eobeso
+         Não    1.124661
+         Sim    0.677419
+         Name: atvFisica, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{obesityClinicalInfo}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eobeso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fumo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} Eobeso
+         Não    0.032520
+         Sim    0.064516
+         Name: fumo, dtype: float64
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
